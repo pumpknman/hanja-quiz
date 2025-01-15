@@ -41,7 +41,7 @@ function ResultPage() {
                 width: 815,
                 minHeight: 'auto',
                 backgroundColor: '#0F1214',
-                borderRadius: 15,
+                borderRadius: '15px',
                 border: '1px solid #1B1F24',
                 display: 'flex',
                 flexDirection: 'column',
