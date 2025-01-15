@@ -19,12 +19,12 @@ function WelcomePage() {
                 alignItems: 'center',
             }}
         >
-            <Typography variant="h1" gutterBottom color="#fff" sx={{ fontWeight: '500' }}>
+            <Typography variant="h2" gutterBottom color="#fff" sx={{ fontWeight: '500' }}>
                 환영합니다!
             </Typography>
             <Typography variant="body1" color="#ccc" sx={{ mb: 4 }}>
                 🎓 한자를 배우는 가장 재미있는 방법!<br />
-                📝 급수별 퀴즈로 실력을 확인하고 목표를 달성하세요!<br />
+                📝 급수별 실력을 확인하고 목표를 달성하세요!<br />
                 🚀 지금 시작해볼까요?
             </Typography>
             <Box
