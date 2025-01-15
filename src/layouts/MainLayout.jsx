@@ -1,4 +1,3 @@
-// src/layouts/MainLayout.jsx
 import React from 'react';
 import { Box } from '@mui/material';
 import { useLocation } from 'react-router-dom';
@@ -10,7 +9,6 @@ function MainLayout({ children }) {
     const isResultPage = location.pathname === '/result';
 
     if (isResultPage) {
-        // ResultPage 전용 레이아웃
         return (
             <Box
                 sx={{
@@ -21,19 +19,21 @@ function MainLayout({ children }) {
                     bottom: 0,
                     background: 'linear-gradient(#0F1214, #0C1A27)',
                     backgroundAttachment: 'fixed',
+                    minHeight: '100vh',
+                    width: '100vw',
                     overflowY: 'auto',
                     display: 'flex',
                     justifyContent: 'center',
                     alignItems: 'flex-start', // 상단 정렬
-                    p: 4,
+                    padding: 2,
+                    boxSizing: 'border-box',
                 }}
             >
-                {children} {/* ResultPage 콘텐츠만 렌더링 */}
+                {children}
             </Box>
         );
     }
 
-    // 다른 페이지의 기본 레이아웃
     return (
         <Box
             sx={{
@@ -44,24 +44,28 @@ function MainLayout({ children }) {
                 bottom: 0,
                 background: 'linear-gradient(#0F1214, #0C1A27)',
                 backgroundAttachment: 'fixed',
+                minHeight: '100vh',
+                width: '100vw',
                 overflowY: 'auto',
                 display: 'flex',
                 justifyContent: 'center',
                 alignItems: 'center',
-                p: 2, // 모바일 화면에서 패딩 추가
             }}
         >
             <Box
                 sx={{
-                    width: { xs: '90%', sm: 600, md: 750, lg: 815 }, // 반응형 너비
-                    height: 815, // 고정 높이
+                    width: '90%',
+                    maxWidth: 815,
+                    height: 815,
                     backgroundColor: '#0F1214',
                     borderRadius: '15px',
                     border: '1px solid #1B1F24',
-                    overflow: 'hidden', // 내용이 박스에서 넘치지 않도록 설정
+                    display: 'flex',
+                    flexDirection: 'column',
+                    boxSizing: 'border-box',
                 }}
             >
-                {children} {/* 기본 페이지 콘텐츠 */}
+                {children}
             </Box>
         </Box>
     );

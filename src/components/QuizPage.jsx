@@ -1,6 +1,8 @@
 import React, { useState, useEffect, useMemo } from 'react';
 import { useParams, useNavigate, useSearchParams } from 'react-router-dom';
 import { Box, Typography, Button, Fade } from '@mui/material';
+import { analytics } from "../firebase"; // Firebase Analytics 인스턴스 가져오기
+import { logEvent } from "firebase/analytics"; // logEvent 가져오기
 
 function QuizPage() {
     const { level } = useParams();
@@ -17,8 +19,8 @@ function QuizPage() {
     const [answers, setAnswers] = useState([]);
     const [timeElapsed, setTimeElapsed] = useState(0);
 
-    const [fadeInQuestion, setFadeInQuestion] = useState(true); // 문제 애니메이션 상태
-    const [fadeInButtons, setFadeInButtons] = useState(true); // 버튼 애니메이션 상태
+    const [fadeInQuestion, setFadeInQuestion] = useState(true);
+    const [fadeInButtons, setFadeInButtons] = useState(true);
 
     // ----------------------
     // JSON fetch
@@ -82,22 +84,32 @@ function QuizPage() {
         };
         setAnswers((prev) => [...prev, answerObj]);
 
+        // Firebase Analytics 로그 기록
+        if (analytics) {
+            logEvent(analytics, "answer_selected", {
+                level,
+                question: currentQuestion.hanja,
+                user_answer: option,
+                is_correct: isCorrect,
+            });
+        }
+
         if (!isCorrect) {
             setHighlightedCorrect(currentQuestion.correctAnswer);
         }
 
         setTimeout(() => {
-            setFadeInQuestion(false); // 문제 페이드 아웃
-            setFadeInButtons(false); // 버튼 페이드 아웃
-            setTimeout(() => goNext(answerObj), 500); // 화면 전환
+            setFadeInQuestion(false);
+            setFadeInButtons(false);
+            setTimeout(() => goNext(answerObj), 500);
         }, 1000);
     }
 
     function goNext(answerObj) {
         const nextIndex = currentIndex + 1;
         if (nextIndex < quizData.length) {
-            setFadeInQuestion(true); // 문제 페이드 인
-            setFadeInButtons(true); // 버튼 애니메이션 재활성화
+            setFadeInQuestion(true);
+            setFadeInButtons(true);
             setCurrentIndex(nextIndex);
             setSelectedAnswer(null);
             setHighlightedCorrect(null);
@@ -109,6 +121,16 @@ function QuizPage() {
                     timeElapsed,
                 },
             });
+
+            // 퀴즈 완료 이벤트 기록
+            if (analytics) {
+                logEvent(analytics, "quiz_completed", {
+                    level,
+                    total_questions: quizData.length,
+                    correct_answers: answers.filter(a => a.isCorrect).length,
+                    time_taken: timeElapsed,
+                });
+            }
         }
     }
 
@@ -141,19 +163,16 @@ function QuizPage() {
                 boxSizing: 'border-box',
             }}
         >
-            {/* 상단 표시 */}
             <Typography variant="h6" mb={2}>
                 {formatLevelLabel(level)} │⌛{formatTime(timeElapsed)} │📝 {currentIndex + 1} / {quizData.length}
             </Typography>
 
-            {/* 한자 표시 */}
             <Fade in={fadeInQuestion} timeout={500}>
                 <Typography variant="h1" mb={4} sx={{ color: '#fff' }}>
                     {currentQuestion.hanja}
                 </Typography>
             </Fade>
 
-            {/* 보기 버튼 */}
             {currentQuestion.options?.map((option, idx) => (
                 <Fade key={idx} in={fadeInButtons} timeout={500}>
                     <Button
@@ -163,15 +182,15 @@ function QuizPage() {
                         size="large"
                         sx={{
                             width: { xs: '80%', sm: 435 },
-                            height: 65,
+                            height: 45,
                             mb: 2,
                             backgroundColor:
                                 selectedAnswer === option
                                     ? option === currentQuestion.correctAnswer
-                                        ? '#4caf50' // 정답 색상
-                                        : '#ef5350' // 오답 색상
+                                        ? '#4caf50'
+                                        : '#ef5350'
                                     : option === highlightedCorrect
-                                        ? '#4caf50' // 정답 강조
+                                        ? '#4caf50'
                                         : '#1673ff',
                             '&.Mui-disabled': {
                                 backgroundColor:
