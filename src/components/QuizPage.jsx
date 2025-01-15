@@ -124,7 +124,7 @@ function QuizPage() {
     if (!currentQuestion) {
         return (
             <Box sx={{ color: '#fff', p: 2 }}>
-                <Typography>문제를 불러오는 중...</Typography>
+                <Typography>문제를 불러오는 중....</Typography>
             </Box>
         );
     }
