@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { Box, Typography, Button, Alert, Stack } from '@mui/material';
 import { Gauge } from '@mui/x-charts/Gauge';
+import AlertTitle from '@mui/material/AlertTitle';
 import Confetti from 'react-confetti';
 
 function ResultPage() {
@@ -99,8 +100,8 @@ function ResultPage() {
                             color: '#ffffff',
                         }}
                     >
-                        <strong>{answer.hanja}</strong>
-                        <br />
+
+                        <AlertTitle>{answer.hanja}</AlertTitle>
                         정답: {answer.correctAnswer}
                         <br />
                         내가 선택한 답: {answer.userAnswer}

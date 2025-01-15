@@ -19,7 +19,6 @@ function QuizPage() {
     const [timeElapsed, setTimeElapsed] = useState(0);
 
     const [fadeInQuestion, setFadeInQuestion] = useState(true); // 문제 애니메이션 상태
-    const [fadeInButtons, setFadeInButtons] = useState(false); // 버튼 애니메이션 상태
 
     // ----------------------
     // JSON fetch
@@ -124,7 +123,7 @@ function QuizPage() {
     if (!currentQuestion) {
         return (
             <Box sx={{ color: '#fff', p: 2 }}>
-                <Typography>문제를 불러오는 중....</Typography>
+                <Typography>문제를 불러오는 중...</Typography>
             </Box>
         );
     }
