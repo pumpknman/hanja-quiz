@@ -182,7 +182,7 @@ function QuizPage() {
                         size="large"
                         sx={{
                             width: { xs: '80%', sm: 435 },
-                            height: 65,
+                            height: 45,
                             mb: 2,
                             backgroundColor:
                                 selectedAnswer === option
