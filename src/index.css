@@ -1,0 +1,26 @@
+html,
+body {
+  margin: 0;
+  font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  /* 아래부터 새로운 코드 */
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  height: 100%;
+  /* 배경 투명 */
+  background: transparent;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+    monospace;
+}
+
+/* 박스 사이징 통일 */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
