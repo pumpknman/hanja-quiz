@@ -1,7 +1,6 @@
 import React, { useState, useEffect, useMemo } from 'react';
 import { useParams, useNavigate, useSearchParams } from 'react-router-dom';
 import { Box, Typography, Button, Fade } from '@mui/material';
-import AlertTitle from '@mui/material/AlertTitle';
 
 function QuizPage() {
     const { level } = useParams();
@@ -19,7 +18,7 @@ function QuizPage() {
     const [timeElapsed, setTimeElapsed] = useState(0);
 
     const [fadeInQuestion, setFadeInQuestion] = useState(true); // 문제 애니메이션 상태
-    const [fadeInButtons, setFadeInButtons] = useState(false); // 버튼 애니메이션 상태
+    const [fadeInButtons, setFadeInButtons] = useState(true); // 버튼 애니메이션 상태
 
     // ----------------------
     // JSON fetch
@@ -52,7 +51,6 @@ function QuizPage() {
                 };
             });
             setQuizData(prepared);
-            setFadeInButtons(true); // 버튼 애니메이션 활성화
         }
     }, [allData, problemCount]);
 
@@ -99,8 +97,7 @@ function QuizPage() {
         const nextIndex = currentIndex + 1;
         if (nextIndex < quizData.length) {
             setFadeInQuestion(true); // 문제 페이드 인
-            setFadeInButtons(false); // 버튼 애니메이션 비활성화
-            setTimeout(() => setFadeInButtons(true), 100); // 버튼 애니메이션 재활성화
+            setFadeInButtons(true); // 버튼 애니메이션 재활성화
             setCurrentIndex(nextIndex);
             setSelectedAnswer(null);
             setHighlightedCorrect(null);
@@ -150,9 +147,7 @@ function QuizPage() {
             </Typography>
 
             {/* 한자 표시 */}
-            <br />
             <Fade in={fadeInQuestion} timeout={500}>
-
                 <Typography variant="h1" mb={4} sx={{ color: '#fff' }}>
                     {currentQuestion.hanja}
                 </Typography>
@@ -160,42 +155,40 @@ function QuizPage() {
 
             {/* 보기 버튼 */}
             {currentQuestion.options?.map((option, idx) => (
-                // <Fade key={idx} in={fadeInButtons} timeout={500}>
-                <Button
-                    variant="contained"
-                    disabled={selectedAnswer !== null}
-                    onClick={() => handleSelectAnswer(option)}
-                    size="large"
-                    sx={{
-                        width: { xs: '80%', sm: 435 },
-                        height: 65,
-                        mb: 2,
-                        backgroundColor:
-                            selectedAnswer === option
-                                ? option === currentQuestion.correctAnswer
-                                    ? '#4caf50' // 정답 색상
-                                    : '#ef5350' // 오답 색상
-                                : option === highlightedCorrect
-                                    ? '#4caf50' // 정답 강조
-                                    : '#1673ff',
-                        '&.Mui-disabled': {
+                <Fade key={idx} in={fadeInButtons} timeout={500}>
+                    <Button
+                        variant="contained"
+                        disabled={selectedAnswer !== null}
+                        onClick={() => handleSelectAnswer(option)}
+                        size="large"
+                        sx={{
+                            width: { xs: '80%', sm: 435 },
+                            height: 65,
+                            mb: 2,
                             backgroundColor:
                                 selectedAnswer === option
                                     ? option === currentQuestion.correctAnswer
-                                        ? '#4caf50'
-                                        : '#ef5350'
+                                        ? '#4caf50' // 정답 색상
+                                        : '#ef5350' // 오답 색상
                                     : option === highlightedCorrect
-                                        ? '#4caf50'
+                                        ? '#4caf50' // 정답 강조
                                         : '#1673ff',
-                            color: '#fff',
-                        },
-                    }}
-                >
-                    <AlertTitle>{option}</AlertTitle>
-
-
-                </Button>
-                //</Fade>
+                            '&.Mui-disabled': {
+                                backgroundColor:
+                                    selectedAnswer === option
+                                        ? option === currentQuestion.correctAnswer
+                                            ? '#4caf50'
+                                            : '#ef5350'
+                                        : option === highlightedCorrect
+                                            ? '#4caf50'
+                                            : '#1673ff',
+                                color: '#fff',
+                            },
+                        }}
+                    >
+                        {option}
+                    </Button>
+                </Fade>
             ))}
         </Box>
     );
