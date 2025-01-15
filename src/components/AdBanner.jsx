@@ -26,15 +26,12 @@ function AdBanner({ isMobile }) {
             {/* Google AdSense Banner */}
             <ins
                 className="adsbygoogle"
-                style={{
-                    display: 'block',
-                    width: isMobile ? '100%' : '300px',
-                    height: isMobile ? '50px' : '250px',
-                }}
-                data-ad-client="YOUR_ADSENSE_CLIENT_ID" // Replace with your AdSense Client ID
-                data-ad-slot="YOUR_AD_SLOT_ID" // Replace with your Ad Slot ID
+                style={{ display: 'block', width: isMobile ? '100%' : '300px', height: isMobile ? '50px' : '250px' }}
+                data-ad-client={process.env.REACT_APP_ADSENSE_CLIENT_ID}
+                data-ad-slot={process.env.REACT_APP_ADSENSE_SLOT_ID}
                 data-ad-format={isMobile ? 'auto' : 'rectangle'}
             ></ins>
+
         </div>
     );
 }
