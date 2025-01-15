@@ -71,8 +71,8 @@ function LevelSelectPage() {
                             variant="contained"
                             onClick={() => handleLevelSelect(level)}
                             sx={{
-                                width: 100,
-                                height: 100,
+                                width: 85,
+                                height: 85,
                                 backgroundColor: '#1673ff',
                                 '&:hover': { backgroundColor: '#125bcc' },
                                 color: '#fff',
