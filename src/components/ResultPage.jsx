@@ -63,10 +63,10 @@ function ResultPage() {
 
             {/* 결과 텍스트 */}
             <Typography variant="h4" mb={2} color="#fff" textAlign="center">
-                총 {totalQuestions}문제 중 {correctAnswers}문제 정답!
+                총 {totalQuestions}문제 중<br /> {correctAnswers}문제 정답!
             </Typography>
             <Typography variant="h6" mb={4} color="#fff" textAlign="center">
-                ✅ 정답률: {correctPercentage}% | 🎚️급수: {formatLevelLabel(level)} | ⌛시간: {formatTime(timeElapsed)}
+                ✅ 정답률: {correctPercentage}% | {formatLevelLabel(level)} | ⌛{formatTime(timeElapsed)}
             </Typography>
 
             {/* Gauge 컴포넌트 */}
@@ -101,7 +101,15 @@ function ResultPage() {
                         }}
                     >
 
-                        <AlertTitle>{answer.hanja}</AlertTitle>
+                        <AlertTitle
+                            sx={
+                                {
+                                    fontSize: '1.2rem',
+                                    fontWeight: '900',
+                                }
+                            }
+                        >
+                            {answer.hanja}</AlertTitle>
                         정답: {answer.correctAnswer}
                         <br />
                         내가 선택한 답: {answer.userAnswer}

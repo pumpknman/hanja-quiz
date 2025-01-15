@@ -143,7 +143,7 @@ function QuizPage() {
         >
             {/* 상단 표시 */}
             <Typography variant="h6" mb={2}>
-                🎚️급: {formatLevelLabel(level)} | ⌛진행시간: {formatTime(timeElapsed)} | 📝{currentIndex + 1}/{quizData.length}
+                {formatLevelLabel(level)} │⌛{formatTime(timeElapsed)} │📝 {currentIndex + 1} / {quizData.length}
             </Typography>
 
             {/* 한자 표시 */}
@@ -186,7 +186,7 @@ function QuizPage() {
                             },
                         }}
                     >
-                        {option}
+                        <h3>{option}</h3>
                     </Button>
                 </Fade>
             ))}
