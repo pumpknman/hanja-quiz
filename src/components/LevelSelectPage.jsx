@@ -20,16 +20,17 @@ function LevelSelectPage() {
     return (
         <Box
             sx={{
-                width: '100%',
-                minHeight: '100%',
+                width: '100vw',
+                height: '100vh',
                 display: 'flex',
                 flexDirection: 'column',
                 alignItems: 'center',
-                justifyContent: 'center',
+                justifyContent: 'flex-start', // 상단부터 콘텐츠 정렬
                 px: 2,
                 py: 4, // 상하 여백 추가
                 boxSizing: 'border-box',
-                overflowY: 'auto',
+                overflowY: 'auto', // 스크롤 가능
+                backgroundColor: '#0F1214',
             }}
         >
             {/* 제목 */}
@@ -88,10 +89,10 @@ function LevelSelectPage() {
                 ))}
             </Grid>
 
-            {/* 하단 공간 확보 */}
+            {/* 하단 여백 추가 */}
             <Box
                 sx={{
-                    height: 50, // 하단에 추가 여백
+                    height: { xs: 100, sm: 50 }, // 모바일에서는 추가 여백
                 }}
             />
         </Box>
