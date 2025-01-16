@@ -18,7 +18,6 @@ function LevelSelectPage() {
     };
 
     return (
-        <AdBanner />
         <Box
             sx={{
                 width: '100%',
