@@ -6,7 +6,7 @@ function AdBanner({ isMobile }) {
         const script = document.createElement('script');
         script.async = true;
         script.src = 'https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js';
-        script.setAttribute('data-ad-client', 'YOUR_ADSENSE_CLIENT_ID'); // Replace with your AdSense Client ID
+        script.setAttribute('data-ad-client', 'env.REACT_APP_ADSENSE_CLIENT_ID'); // Replace with your AdSense Client ID
         document.body.appendChild(script);
         return () => document.body.removeChild(script); // Clean up
     }, []);
