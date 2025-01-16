@@ -10,31 +10,49 @@ const levels = [
 
 function LevelSelectPage() {
     const navigate = useNavigate();
-    const [problemCount, setProblemCount] = useState(10); // 문제 수 선택 상태
+    const [problemCount, setProblemCount] = useState(10);
 
     const handleLevelSelect = (level) => {
-        const levelKey = level.replace('급 II', '_2').replace('급', '');
+        let levelKey = level;
+
+        if (level === '특급 II') {
+            levelKey = 'teuk_2';
+        } else if (level === '특급') {
+            levelKey = 'teuk';
+        } else {
+            levelKey = level.replace('급 II', '_2').replace('급', '');
+        }
+
         navigate(`/quiz/${levelKey}?count=${problemCount}`);
     };
 
     return (
         <Box
             sx={{
-                width: '100vw',
-                height: '100vh',
+                width: '100%', // 100vw 대신 100%로 수정
+                minHeight: '100vh',
                 display: 'flex',
                 flexDirection: 'column',
                 alignItems: 'center',
-                justifyContent: 'flex-start', // 상단부터 콘텐츠 정렬
+                justifyContent: 'flex-start',
                 px: 2,
-                py: 4, // 상하 여백 추가
+                py: 4,
                 boxSizing: 'border-box',
-                overflowY: 'auto', // 스크롤 가능
+                overflowY: 'auto',
                 backgroundColor: '#0F1214',
+                position: 'relative', // 레이아웃 문제 해결
+                margin: '0 auto', // 중앙 정렬
             }}
         >
             {/* 제목 */}
-            <Typography variant="h4" color="#fff" mb={4}>
+            <Typography
+                variant="h4"
+                color="#fff"
+                mb={4}
+                sx={{
+                    textAlign: 'center',
+                }}
+            >
                 급수를 선택하세요
             </Typography>
 
@@ -65,7 +83,15 @@ function LevelSelectPage() {
             </FormControl>
 
             {/* 급수 버튼 */}
-            <Grid container spacing={2} justifyContent="center">
+            <Grid
+                container
+                spacing={2}
+                justifyContent="center"
+                sx={{
+                    maxWidth: '100%', // Grid의 최대 너비 설정
+                    px: 2, // 좌우 여백 추가
+                }}
+            >
                 {levels.map((level, idx) => (
                     <Grid item key={idx}>
                         <Button
@@ -81,6 +107,7 @@ function LevelSelectPage() {
                                 display: 'flex',
                                 justifyContent: 'center',
                                 alignItems: 'center',
+                                textAlign: 'center',
                             }}
                         >
                             {level}
@@ -89,10 +116,10 @@ function LevelSelectPage() {
                 ))}
             </Grid>
 
-            {/* 하단 여백 추가 */}
+            {/* 하단 여백 */}
             <Box
                 sx={{
-                    height: { xs: 100, sm: 50 }, // 모바일에서는 추가 여백
+                    height: { xs: 100, sm: 50 },
                 }}
             />
         </Box>
