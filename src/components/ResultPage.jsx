@@ -38,7 +38,8 @@ function ResultPage() {
     return (
         <Box
             sx={{
-                width: 815,
+                width: '100%',
+                maxWidth: '815px', // 모바일과 PC 모두에 적합한 너비 설정
                 minHeight: 'auto',
                 backgroundColor: '#0F1214',
                 borderRadius: '15px',
@@ -50,6 +51,17 @@ function ResultPage() {
                 p: 4,
                 overflowY: 'auto',
                 position: 'relative', // Confetti가 박스 기준으로 정렬되지 않도록
+                '&::-webkit-scrollbar': {
+                    width: '10px',
+                },
+                '&::-webkit-scrollbar-thumb': {
+                    backgroundColor: '#444', // 스크롤바 색상 어두운 톤으로 변경
+                    borderRadius: '5px',
+                },
+                '&::-webkit-scrollbar-track': {
+                    backgroundColor: '#1B1F24',
+                },
+                overflowX: 'hidden', // 좌우 스크롤 방지
             }}
         >
             {/* 불꽃놀이 효과 */}
@@ -57,16 +69,19 @@ function ResultPage() {
                 <Confetti
                     width={window.innerWidth}
                     height={window.innerHeight}
-                    numberOfPieces={600}
+                    numberOfPieces={200}
+                    recycle={false} // 불꽃놀이 효과로 인해 좌우 스크롤 방지
                 />
             )}
 
             {/* 결과 텍스트 */}
-            <Typography variant="h4" mb={2} color="#fff" textAlign="center">
+            <Typography variant="h4" mb={2} color="#fff" textAlign="center" sx={{
+                fontWeight: 900,
+            }}>
                 총 {totalQuestions}문제 중<br /> {correctAnswers}문제 정답!
             </Typography>
             <Typography variant="h6" mb={4} color="#fff" textAlign="center">
-                ✅ 정답률: {correctPercentage}% | {formatLevelLabel(level)} | ⌛{formatTime(timeElapsed)}
+                ✅정답률: {correctPercentage}% | {formatLevelLabel(level)} | ⌛{formatTime(timeElapsed)}
             </Typography>
 
             {/* Gauge 컴포넌트 */}
@@ -87,35 +102,40 @@ function ResultPage() {
             </Box>
 
             {/* 문제 리뷰 리스트 */}
-            <Typography variant="h5" mb={2} color="#fff">
-                문제 리뷰
-            </Typography>
-            <Stack spacing={2} sx={{ width: '100%' }}>
-                {answers.map((answer, idx) => (
-                    <Alert
-                        key={idx}
-                        severity={answer.isCorrect ? 'success' : 'error'}
-                        sx={{
-                            bgcolor: answer.isCorrect ? 'success.light' : 'error.light',
-                            color: '#ffffff',
-                        }}
-                    >
-
-                        <AlertTitle
-                            sx={
-                                {
-                                    fontSize: '1.2rem',
-                                    fontWeight: '900',
-                                }
-                            }
+            <Box
+                sx={{
+                    width: '100%',
+                    maxWidth: '815px', // 모바일과 PC에 적합한 반응형 너비
+                }}
+            >
+                <Typography variant="h5" mb={2} color="#fff">
+                    문제 리뷰
+                </Typography>
+                <Stack spacing={2} sx={{ width: '100%' }}>
+                    {answers.map((answer, idx) => (
+                        <Alert
+                            key={idx}
+                            severity={answer.isCorrect ? 'success' : 'error'}
+                            sx={{
+                                bgcolor: answer.isCorrect ? 'success.light' : 'error.light',
+                                color: '#ffffff',
+                            }}
                         >
-                            {answer.hanja}</AlertTitle>
-                        정답: {answer.correctAnswer}
-                        <br />
-                        내가 선택한 답: {answer.userAnswer}
-                    </Alert>
-                ))}
-            </Stack>
+                            <AlertTitle
+                                sx={{
+                                    fontSize: '1.3rem',
+                                    fontWeight: '600',
+                                }}
+                            >
+                                {answer.hanja}
+                            </AlertTitle>
+                            정답: {answer.correctAnswer}
+                            <br />
+                            내가 선택한 답: {answer.userAnswer}
+                        </Alert>
+                    ))}
+                </Stack>
+            </Box>
 
             {/* 다시 풀기 버튼 */}
             <Box

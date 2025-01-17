@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Box, Button, Grid, Typography, MenuItem, Select, FormControl, InputLabel } from '@mui/material';
+import { Box, Button, Grid2, Typography, MenuItem, Select, FormControl, InputLabel } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
 
 const levels = [
@@ -29,26 +29,23 @@ function LevelSelectPage() {
     return (
         <Box
             sx={{
-                width: '100%', // 100vw 대신 100%로 수정
-                minHeight: '100vh',
+                width: '100%',
+                height: '100%',
+                color: '#fff',
+                overflow: 'hidden',
                 display: 'flex',
                 flexDirection: 'column',
                 alignItems: 'center',
-                justifyContent: 'flex-start',
-                px: 2,
-                py: 4,
+                justifyContent: 'center',
+                p: 2,
                 boxSizing: 'border-box',
-                overflowY: 'auto',
-                backgroundColor: '#0F1214',
-                position: 'relative', // 레이아웃 문제 해결
-                margin: '0 auto', // 중앙 정렬
             }}
         >
             {/* 제목 */}
             <Typography
                 variant="h4"
                 color="#fff"
-                mb={4}
+                mb={3} // 간격 증가
                 sx={{
                     textAlign: 'center',
                 }}
@@ -60,7 +57,7 @@ function LevelSelectPage() {
             <FormControl
                 sx={{
                     minWidth: 200,
-                    mb: 4,
+                    mb: 3, // 간격 증가
                 }}
             >
                 <InputLabel id="problem-count-label" sx={{ color: '#fff' }}>
@@ -83,43 +80,52 @@ function LevelSelectPage() {
             </FormControl>
 
             {/* 급수 버튼 */}
-            <Grid
-                container
-                spacing={2}
-                justifyContent="center"
+            <Box
                 sx={{
-                    maxWidth: '100%', // Grid의 최대 너비 설정
-                    px: 2, // 좌우 여백 추가
+                    overflowY: 'auto',
+                    maxHeight: 'calc(100vh - 300px)', // 스크롤 가능한 영역 높이 제한
+                    width: '100%',
+                    WebkitOverflowScrolling: 'touch',
                 }}
             >
-                {levels.map((level, idx) => (
-                    <Grid item key={idx}>
-                        <Button
-                            variant="contained"
-                            onClick={() => handleLevelSelect(level)}
-                            sx={{
-                                width: 100,
-                                height: 100,
-                                backgroundColor: '#1673ff',
-                                '&:hover': { backgroundColor: '#125bcc' },
-                                color: '#fff',
-                                fontSize: '1rem',
-                                display: 'flex',
-                                justifyContent: 'center',
-                                alignItems: 'center',
-                                textAlign: 'center',
-                            }}
-                        >
-                            {level}
-                        </Button>
-                    </Grid>
-                ))}
-            </Grid>
+                <Grid2
+                    container
+                    spacing={2}
+                    justifyContent="center"
+                    sx={{
+                        maxWidth: '100%',
+                        px: 2,
+                    }}
+                >
+                    {levels.map((level, idx) => (
+                        <Grid2 item xs={4} sm={4} md={3} key={idx}>
+                            <Button
+                                variant="contained"
+                                onClick={() => handleLevelSelect(level)}
+                                sx={{
+                                    width: { xs: '80px', sm: '100px' },
+                                    height: { xs: '80px', sm: '100px' },
+                                    backgroundColor: '#1673ff',
+                                    '&:hover': { backgroundColor: '#125bcc' },
+                                    color: '#fff',
+                                    fontSize: '1rem',
+                                    display: 'flex',
+                                    justifyContent: 'center',
+                                    alignItems: 'center',
+                                    textAlign: 'center',
+                                }}
+                            >
+                                {level}
+                            </Button>
+                        </Grid2>
+                    ))}
+                </Grid2>
+            </Box>
 
             {/* 하단 여백 */}
             <Box
                 sx={{
-                    height: { xs: 100, sm: 50 },
+                    height: { xs: 120, sm: 50 },
                 }}
             />
         </Box>
