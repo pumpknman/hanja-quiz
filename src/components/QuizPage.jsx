@@ -1,8 +1,8 @@
 import React, { useState, useEffect, useMemo } from 'react';
 import { useParams, useNavigate, useSearchParams } from 'react-router-dom';
 import { Box, Typography, Button, Fade } from '@mui/material';
-import { analytics } from "../firebase"; // Firebase Analytics 인스턴스 가져오기
-import { logEvent } from "firebase/analytics"; // logEvent 가져오기
+import { analytics } from "../firebase";
+import { logEvent } from "firebase/analytics";
 
 function QuizPage() {
     const { level } = useParams();
@@ -22,43 +22,57 @@ function QuizPage() {
     const [fadeInQuestion, setFadeInQuestion] = useState(true);
     const [fadeInButtons, setFadeInButtons] = useState(true);
 
-    // ----------------------
-    // JSON fetch
-    // ----------------------
+    // Load saved state on mount
     useEffect(() => {
+        const savedState = JSON.parse(localStorage.getItem('quizState'));
+        if (savedState && savedState.level === level) {
+            setQuizData(savedState.quizData || []);
+            setCurrentIndex(savedState.currentIndex || 0);
+            setAnswers(savedState.answers || []);
+            setTimeElapsed(savedState.timeElapsed || 0);
+        }
+    }, [level]);
+
+    // Save state whenever it changes
+    useEffect(() => {
+        localStorage.setItem(
+            'quizState',
+            JSON.stringify({ level, quizData, currentIndex, answers, timeElapsed })
+        );
+    }, [level, quizData, currentIndex, answers, timeElapsed]);
+
+    // Fetch data if not already loaded
+    useEffect(() => {
+        if (quizData.length > 0) return; // Skip if quizData already loaded
+
         const path = getJsonPath(level);
         fetch(path)
             .then((res) => res.json())
             .then((data) => {
+                const savedState = JSON.parse(localStorage.getItem('quizState'));
+                if (savedState && savedState.level === level && savedState.quizData?.length > 0) {
+                    setQuizData(savedState.quizData); // Use previously saved quizData
+                } else {
+                    const chosen = getRandomElements(data, problemCount);
+                    const prepared = chosen.map((row) => {
+                        const correct = parseMeaning(row.meaning);
+                        const wrongPool = data.filter((x) => x.hanja !== row.hanja);
+                        const randomWrongs = getRandomElements(wrongPool, 3).map((w) => parseMeaning(w.meaning));
+                        const fourOptions = shuffleArray([correct, ...randomWrongs]);
+                        return {
+                            ...row,
+                            correctAnswer: correct,
+                            options: fourOptions,
+                        };
+                    });
+                    setQuizData(prepared);
+                }
                 setAllData(data);
             })
             .catch((err) => console.error(err));
-    }, [level]);
+    }, [level, problemCount, quizData]);
 
-    // ----------------------
-    // quizData 구성
-    // ----------------------
-    useEffect(() => {
-        if (allData.length > 0) {
-            const chosen = getRandomElements(allData, problemCount);
-            const prepared = chosen.map((row) => {
-                const correct = parseMeaning(row.meaning);
-                const wrongPool = allData.filter((x) => x.hanja !== row.hanja);
-                const randomWrongs = getRandomElements(wrongPool, 3).map((w) => parseMeaning(w.meaning));
-                const fourOptions = shuffleArray([correct, ...randomWrongs]);
-                return {
-                    ...row,
-                    correctAnswer: correct,
-                    options: fourOptions,
-                };
-            });
-            setQuizData(prepared);
-        }
-    }, [allData, problemCount]);
-
-    // ----------------------
-    // 타이머
-    // ----------------------
+    // Timer for elapsed time
     useEffect(() => {
         const timer = setInterval(() => {
             setTimeElapsed((prev) => prev + 1);
@@ -84,7 +98,6 @@ function QuizPage() {
         };
         setAnswers((prev) => [...prev, answerObj]);
 
-        // Firebase Analytics 로그 기록
         if (analytics) {
             logEvent(analytics, "answer_selected", {
                 level,
@@ -114,6 +127,7 @@ function QuizPage() {
             setSelectedAnswer(null);
             setHighlightedCorrect(null);
         } else {
+            localStorage.removeItem('quizState'); // Clear saved state
             navigate('/result', {
                 state: {
                     answers: [...answers, answerObj],
@@ -122,7 +136,6 @@ function QuizPage() {
                 },
             });
 
-            // 퀴즈 완료 이벤트 기록
             if (analytics) {
                 logEvent(analytics, "quiz_completed", {
                     level,
@@ -142,15 +155,9 @@ function QuizPage() {
 
     if (!currentQuestion) {
         return (
-            <Box sx={
-                {
-                    color: '#fff',
-                    p: 2,
-                    justifyContent: 'center',
-                }
-            } >
+            <Box sx={{ color: '#fff', p: 2, justifyContent: 'center' }}>
                 <Typography>문제를 불러오는 중...</Typography>
-            </Box >
+            </Box>
         );
     }
 
@@ -219,9 +226,7 @@ function QuizPage() {
     );
 }
 
-/* ----------------------
-   유틸 함수
----------------------- */
+/* Utility Functions */
 function getJsonPath(param) {
     if (param.startsWith('teuk')) {
         return `/data/${param}.json`;

@@ -15,7 +15,7 @@ function MainLayout({ children }) {
                 display: 'flex',
                 justifyContent: 'center',
                 alignItems: 'center',
-                padding: { xs: 2, md: 0 }, // 모바일은 여백 추가
+                padding: { xs: 1, md: 0 }, // 모바일은 여백 추가
                 boxSizing: 'border-box',
             }}
         >

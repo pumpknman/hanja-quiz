@@ -8,27 +8,43 @@ import Confetti from 'react-confetti';
 function ResultPage() {
     const location = useLocation();
     const navigate = useNavigate();
-    const answers = location.state?.answers || [];
-    const level = location.state?.level || 'N/A';
-    const timeElapsed = location.state?.timeElapsed || 0;
+
+    // Load state from location or localStorage
+    const [answers, setAnswers] = useState(() => {
+        const savedState = JSON.parse(localStorage.getItem('resultState'));
+        return location.state?.answers || savedState?.answers || [];
+    });
+    const [level, setLevel] = useState(() => {
+        const savedState = JSON.parse(localStorage.getItem('resultState'));
+        return location.state?.level || savedState?.level || 'N/A';
+    });
+    const [timeElapsed, setTimeElapsed] = useState(() => {
+        const savedState = JSON.parse(localStorage.getItem('resultState'));
+        return location.state?.timeElapsed || savedState?.timeElapsed || 0;
+    });
 
     const totalQuestions = answers.length;
     const correctAnswers = answers.filter((ans) => ans.isCorrect).length;
     const correctPercentage = Math.round((correctAnswers / totalQuestions) * 100);
 
-    // 불꽃놀이 상태
     const [showConfetti, setShowConfetti] = useState(true);
 
     useEffect(() => {
-        // 5초 후 불꽃놀이 효과 중지
+        // Save state to localStorage
+        localStorage.setItem(
+            'resultState',
+            JSON.stringify({ answers, level, timeElapsed })
+        );
+
+        // Stop confetti after 5 seconds
         const timer = setTimeout(() => {
             setShowConfetti(false);
         }, 5000);
 
         return () => clearTimeout(timer);
-    }, []);
+    }, [answers, level, timeElapsed]);
 
-    // 시간 포맷 변환 (00:00)
+    // Format elapsed time
     const formatTime = (seconds) => {
         const mins = Math.floor(seconds / 60).toString().padStart(2, '0');
         const secs = (seconds % 60).toString().padStart(2, '0');
@@ -39,7 +55,7 @@ function ResultPage() {
         <Box
             sx={{
                 width: '100%',
-                maxWidth: '815px', // 모바일과 PC 모두에 적합한 너비 설정
+                maxWidth: '815px',
                 minHeight: 'auto',
                 backgroundColor: '#0F1214',
                 borderRadius: '15px',
@@ -50,41 +66,39 @@ function ResultPage() {
                 boxSizing: 'border-box',
                 p: 4,
                 overflowY: 'auto',
-                position: 'relative', // Confetti가 박스 기준으로 정렬되지 않도록
+                position: 'relative',
                 '&::-webkit-scrollbar': {
                     width: '10px',
                 },
                 '&::-webkit-scrollbar-thumb': {
-                    backgroundColor: '#444', // 스크롤바 색상 어두운 톤으로 변경
+                    backgroundColor: '#444',
                     borderRadius: '5px',
                 },
                 '&::-webkit-scrollbar-track': {
                     backgroundColor: '#1B1F24',
                 },
-                overflowX: 'hidden', // 좌우 스크롤 방지
+                overflowX: 'hidden',
             }}
         >
-            {/* 불꽃놀이 효과 */}
+            {/* Confetti */}
             {showConfetti && (
                 <Confetti
                     width={window.innerWidth}
                     height={window.innerHeight}
                     numberOfPieces={200}
-                    recycle={false} // 불꽃놀이 효과로 인해 좌우 스크롤 방지
+                    recycle={false}
                 />
             )}
 
-            {/* 결과 텍스트 */}
-            <Typography variant="h4" mb={2} color="#fff" textAlign="center" sx={{
-                fontWeight: 900,
-            }}>
+            {/* Results */}
+            <Typography variant="h4" mb={2} color="#fff" textAlign="center" sx={{ fontWeight: 900 }}>
                 총 {totalQuestions}문제 중<br /> {correctAnswers}문제 정답!
             </Typography>
             <Typography variant="h6" mb={4} color="#fff" textAlign="center">
                 ✅정답률: {correctPercentage}% | {formatLevelLabel(level)} | ⌛{formatTime(timeElapsed)}
             </Typography>
 
-            {/* Gauge 컴포넌트 */}
+            {/* Gauge */}
             <Box sx={{ display: 'flex', justifyContent: 'center', mb: 4 }}>
                 <Gauge
                     value={correctPercentage}
@@ -101,13 +115,8 @@ function ResultPage() {
                 />
             </Box>
 
-            {/* 문제 리뷰 리스트 */}
-            <Box
-                sx={{
-                    width: '100%',
-                    maxWidth: '815px', // 모바일과 PC에 적합한 반응형 너비
-                }}
-            >
+            {/* Review */}
+            <Box sx={{ width: '100%', maxWidth: '815px' }}>
                 <Typography variant="h5" mb={2} color="#fff">
                     문제 리뷰
                 </Typography>
@@ -121,12 +130,7 @@ function ResultPage() {
                                 color: '#ffffff',
                             }}
                         >
-                            <AlertTitle
-                                sx={{
-                                    fontSize: '1.3rem',
-                                    fontWeight: '600',
-                                }}
-                            >
+                            <AlertTitle sx={{ fontSize: '1.3rem', fontWeight: '600' }}>
                                 {answer.hanja}
                             </AlertTitle>
                             정답: {answer.correctAnswer}
@@ -137,17 +141,14 @@ function ResultPage() {
                 </Stack>
             </Box>
 
-            {/* 다시 풀기 버튼 */}
-            <Box
-                sx={{
-                    display: 'flex',
-                    justifyContent: 'center',
-                    mt: 4,
-                }}
-            >
+            {/* Retry */}
+            <Box sx={{ display: 'flex', justifyContent: 'center', mt: 4 }}>
                 <Button
                     variant="contained"
-                    onClick={() => navigate('/level-select')}
+                    onClick={() => {
+                        localStorage.removeItem('resultState'); // Clear result state
+                        navigate('/level-select');
+                    }}
                     sx={{
                         px: 4,
                         py: 1,
