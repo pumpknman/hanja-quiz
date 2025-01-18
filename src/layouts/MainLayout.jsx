@@ -44,7 +44,6 @@ function MainLayout({ children }) {
                         display: { xs: "none", md: "flex" }, // 모바일에서는 숨김
                         justifyContent: "center",
                         alignItems: "center",
-
                     }}
                 >
                     <ins
@@ -58,8 +57,8 @@ function MainLayout({ children }) {
                 {/* 메인 콘텐츠 박스 */}
                 <Box
                     sx={{
-                        width: { xs: "100%", md: 815 },
-                        height: { xs: "100%", md: 815 },
+                        width: { xs: "95%", md: 815 },
+                        minHeight: { xs: "calc(100vh - 20px)", md: 815 }, // 모바일에서 화면에 맞추기
                         maxWidth: 815,
                         maxHeight: 815,
                         backgroundColor: "#0F1214",
