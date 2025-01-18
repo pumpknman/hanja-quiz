@@ -1,44 +1,100 @@
-import React from 'react';
-import { Box } from '@mui/material';
+import React, { useEffect } from "react";
+import { Box } from "@mui/material";
 
 function MainLayout({ children }) {
+    useEffect(() => {
+        if (window.adsbygoogle) {
+            window.adsbygoogle.push({});
+        }
+    }, []);
+
     return (
         <Box
             sx={{
-                position: 'absolute',
+                position: "absolute",
                 top: 0,
                 left: 0,
                 right: 0,
                 bottom: 0,
-                background: 'linear-gradient(#0F1214, #0C1A27)',
-                backgroundAttachment: 'fixed',
-                display: 'flex',
-                justifyContent: 'center',
-                alignItems: 'center',
-                padding: { xs: 1, md: 0 }, // 모바일은 여백 추가
-                boxSizing: 'border-box',
+                background: "linear-gradient(#0F1214, #0C1A27)",
+                backgroundAttachment: "fixed",
+                display: "flex",
+                justifyContent: "center",
+                alignItems: "center",
+                padding: { xs: 1, md: 0 },
+                boxSizing: "border-box",
             }}
         >
-            {/* 메인 콘텐츠 박스 */}
+            {/* 전체 레이아웃 컨테이너 */}
             <Box
                 sx={{
-                    width: { xs: '100%', md: 815 }, // 모바일: 가로 전체, PC: 815 고정
-                    height: { xs: '100%', md: 815 }, // 모바일: 세로 전체, PC: 815 고정
-                    maxWidth: 815,
-                    maxHeight: 815, // PC에서 최대 815 고정
-                    backgroundColor: '#0F1214',
-                    borderRadius: { xs: '15px', md: '15px' },
-                    border: '1px solid #1B1F24',
-                    boxShadow: '0px 4px 10px rgba(0, 0, 0, 0.5)', // 약간의 그림자
-                    display: 'flex',
-                    flexDirection: 'column',
-                    justifyContent: 'center',
-                    boxSizing: 'border-box',
-                    overflow: 'hidden', // 콘텐츠가 넘칠 경우 스크롤 방지
-                    position: 'relative',
+                    display: "flex", // 좌우 배너와 메인 콘텐츠 박스 배치
+                    justifyContent: "center",
+                    alignItems: "center",
+                    width: "100%", // 화면 전체 너비
+                    maxWidth: "1200px", // 전체 레이아웃 최대 너비
                 }}
             >
-                {children}
+                {/* 왼쪽 광고 영역 */}
+                <Box
+                    sx={{
+                        width: "100px",
+                        height: "600px",
+                        backgroundColor: "#FBE8DC",
+                        display: { xs: "none", md: "flex" }, // 모바일에서는 숨김
+                        justifyContent: "center",
+                        alignItems: "center",
+
+                    }}
+                >
+                    <ins
+                        className="adsbygoogle"
+                        style={{ display: "block", width: "100px", height: "600px" }}
+                        data-ad-client="ca-pub-3940256099942544"
+                        data-ad-slot="1234567890"
+                    ></ins>
+                </Box>
+
+                {/* 메인 콘텐츠 박스 */}
+                <Box
+                    sx={{
+                        width: { xs: "100%", md: 815 },
+                        height: { xs: "100%", md: 815 },
+                        maxWidth: 815,
+                        maxHeight: 815,
+                        backgroundColor: "#0F1214",
+                        borderRadius: { xs: "15px", md: "15px" },
+                        border: "1px solid #1B1F24",
+                        boxShadow: "0px 4px 10px rgba(0, 0, 0, 0.5)",
+                        display: "flex",
+                        flexDirection: "column",
+                        justifyContent: "center",
+                        boxSizing: "border-box",
+                        overflow: "hidden",
+                        position: "relative",
+                    }}
+                >
+                    {children}
+                </Box>
+
+                {/* 오른쪽 광고 영역 */}
+                <Box
+                    sx={{
+                        width: "100px",
+                        height: "600px",
+                        backgroundColor: "#FBE8DC",
+                        display: { xs: "none", md: "flex" }, // 모바일에서는 숨김
+                        justifyContent: "center",
+                        alignItems: "center",
+                    }}
+                >
+                    <ins
+                        className="adsbygoogle"
+                        style={{ display: "block", width: "100px", height: "600px" }}
+                        data-ad-client="ca-pub-3940256099942544"
+                        data-ad-slot="1234567890"
+                    ></ins>
+                </Box>
             </Box>
         </Box>
     );
