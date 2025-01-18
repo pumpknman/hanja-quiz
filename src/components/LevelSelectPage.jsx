@@ -121,13 +121,6 @@ function LevelSelectPage() {
                     ))}
                 </Grid2>
             </Box>
-
-            {/* 하단 여백 */}
-            <Box
-                sx={{
-                    height: { xs: 120, sm: 50 },
-                }}
-            />
         </Box>
     );
 }

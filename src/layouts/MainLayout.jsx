@@ -40,52 +40,6 @@ function MainLayout({ children }) {
             >
                 {children}
             </Box>
-
-            {/* 구글 AdSense 세로 배너 (PC 전용) */}
-            <Box
-                sx={{
-                    display: { xs: 'none', md: 'block' }, // 모바일에서는 숨김
-                    position: 'absolute',
-                    top: 0,
-                    right: 0,
-                    height: '100%',
-                    width: '160px', // 세로 배너 기본 크기
-                    backgroundColor: 'transparent', // 광고 배경 투명
-                    display: 'flex',
-                    justifyContent: 'center',
-                    alignItems: 'center',
-                }}
-            >
-                <ins
-                    className="adsbygoogle"
-                    style={{ display: 'block', width: '160px', height: '600px' }}
-                    data-ad-client="YOUR_ADSENSE_CLIENT_ID"
-                    data-ad-slot="YOUR_AD_SLOT"
-                ></ins>
-            </Box>
-
-            {/* 모바일 하단 고정 배너 */}
-            <Box
-                sx={{
-                    display: { xs: 'block', md: 'none' }, // PC에서는 숨김
-                    position: 'fixed',
-                    bottom: 0,
-                    left: 0,
-                    right: 0,
-                    height: '50px', // 가로 배너 높이
-                    backgroundColor: '#0F1214', // 배경색
-                    display: 'flex',
-                    justifyContent: 'center',
-                    alignItems: 'center',
-                }}
-            >
-                <ins
-                    className="adsbygoogle"
-                    style={{ display: 'block', width: '100%', height: '50px' }}
-                    data-ad-client="YOUR_ADSENSE_CLIENT_ID"
-                    data-ad-slot="YOUR_AD_SLOT"
-                ></ins>
-            </Box>
         </Box>
     );
 }
