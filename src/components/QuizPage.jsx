@@ -142,9 +142,15 @@ function QuizPage() {
 
     if (!currentQuestion) {
         return (
-            <Box sx={{ color: '#fff', p: 2 }}>
+            <Box sx={
+                {
+                    color: '#fff',
+                    p: 2,
+                    justifyContent: 'center',
+                }
+            } >
                 <Typography>문제를 불러오는 중...</Typography>
-            </Box>
+            </Box >
         );
     }
 
