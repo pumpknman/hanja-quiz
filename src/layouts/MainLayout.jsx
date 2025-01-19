@@ -5,11 +5,7 @@ import { useLocation } from "react-router-dom";
 function MainLayout({ children }) {
     const location = useLocation();
 
-    useEffect(() => {
-        if (window.adsbygoogle) {
-            window.adsbygoogle.push({});
-        }
-    }, []);
+
 
     const isResultPage = location.pathname === "/result";
 
@@ -45,18 +41,14 @@ function MainLayout({ children }) {
                     sx={{
                         width: "100px",
                         height: "600px",
-                        backgroundColor: "#FBE8DC",
+                        // backgroundColor: "#FBE8DC",
                         display: { xs: "none", md: "flex" },
                         justifyContent: "center",
                         alignItems: "center",
+                        marginRight: "10px",
                     }}
                 >
-                    <ins
-                        className="adsbygoogle"
-                        style={{ display: "block", width: "100px", height: "600px" }}
-                        data-ad-client="ca-pub-3940256099942544"
-                        data-ad-slot="1234567890"
-                    ></ins>
+                    <iframe src="https://ads-partners.coupang.com/widgets.html?id=832578&template=carousel&trackingCode=AF9925383&subId=&width=100&height=600&tsource=" width="100" height="600" frameborder="0" scrolling="no" referrerpolicy="unsafe-url" browsingtopics></iframe>
                 </Box>
 
                 {/* 메인 콘텐츠 박스 */}
@@ -88,18 +80,14 @@ function MainLayout({ children }) {
                     sx={{
                         width: "100px",
                         height: "600px",
-                        backgroundColor: "#FBE8DC",
+                        // backgroundColor: "#FBE8DC",
                         display: { xs: "none", md: "flex" },
                         justifyContent: "center",
                         alignItems: "center",
+                        marginLeft: "10px",
                     }}
                 >
-                    <ins
-                        className="adsbygoogle"
-                        style={{ display: "block", width: "100px", height: "600px" }}
-                        data-ad-client="ca-pub-3940256099942544"
-                        data-ad-slot="1234567890"
-                    ></ins>
+                    <iframe src="https://ads-partners.coupang.com/widgets.html?id=832578&template=carousel&trackingCode=AF9925383&subId=&width=100&height=600&tsource=" width="100" height="600" frameborder="0" scrolling="no" referrerpolicy="unsafe-url" browsingtopics></iframe>
                 </Box>
             </Box>
 
