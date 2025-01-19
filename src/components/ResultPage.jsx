@@ -35,7 +35,7 @@ function ResultPage() {
 
         const timer = setTimeout(() => {
             setShowConfetti(false);
-        }, 5000);
+        }, 3000);
 
         return () => clearTimeout(timer);
     }, [answers, level, timeElapsed]);
@@ -65,7 +65,7 @@ function ResultPage() {
             <Box
                 sx={{
                     width: { xs: "95%", md: 815 },
-                    height: { xs: "auto", md: 815 },
+                    height: { xs: "95%", md: 815 },
                     maxWidth: 815,
                     maxHeight: 815,
                     backgroundColor: "#0F1214",
