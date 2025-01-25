@@ -64,14 +64,14 @@ function ResultPage() {
         >
             <Box
                 sx={{
-                    width: { xs: "95%", md: 815 },
-                    height: { xs: "95%", md: 815 },
+                    width: { xs: "100%", md: 815 },
+                    height: { xs: "100%", md: 815 },
                     maxWidth: 815,
                     maxHeight: 815,
                     backgroundColor: "#0F1214",
-                    borderRadius: { xs: "15px", md: "15px" },
-                    border: "1px solid #1B1F24",
-                    boxShadow: "0px 4px 10px rgba(0, 0, 0, 0.5)",
+                    // borderRadius: { xs: "15px", md: "15px" },
+                    //border: "1px solid #1B1F24",
+                    //boxShadow: "0px 4px 10px rgba(0, 0, 0, 0.5)",
                     display: "flex",
                     flexDirection: "column",
                     justifyContent: "flex-start",

@@ -22,6 +22,7 @@ function MainLayout({ children }) {
                 boxSizing: "border-box",
                 height: "100vh",
                 overflow: "hidden",
+
             }}
         >
             <Box
@@ -31,6 +32,7 @@ function MainLayout({ children }) {
                     alignItems: "center",
                     width: "100%",
                     maxWidth: "1200px",
+
                 }}
             >
                 {/* 왼쪽 광고 영역 */}
@@ -44,7 +46,15 @@ function MainLayout({ children }) {
                         marginRight: "10px",
                     }}
                 >
-                    <iframe src="https://ads-partners.coupang.com/widgets.html?id=832578&template=carousel&trackingCode=AF9925383&subId=&width=100&height=600&tsource=" width="100" height="600" frameBorder="0" scrolling="no" referrerPolicy="unsafe-url" browsingtopics></iframe>
+                    <iframe
+                        src="https://ads-partners.coupang.com/widgets.html?id=832578&template=carousel&trackingCode=AF9925383&subId=&width=100&height=600&tsource="
+                        width="100"
+                        height="600"
+                        frameBorder="0"
+                        scrolling="no"
+                        referrerPolicy="unsafe-url"
+                        browsingtopics
+                    ></iframe>
                 </Box>
 
                 {/* 메인 콘텐츠 박스 */}
@@ -64,9 +74,26 @@ function MainLayout({ children }) {
                         boxSizing: "border-box",
                         overflow: "hidden",
                         position: "relative",
+                        backgroundColor: "#0F1214",
                     }}
                 >
-                    {children}
+                    {/* ResultPage의 경우 별도 레이아웃 적용 */}
+                    {isResultPage ? (
+                        <Box
+                            sx={{
+                                width: "100%",
+                                height: "100%",
+                                display: "flex",
+                                justifyContent: "center",
+                                alignItems: "center",
+
+                            }}
+                        >
+                            {children}
+                        </Box>
+                    ) : (
+                        children
+                    )}
                 </Box>
 
                 {/* 오른쪽 광고 영역 */}
@@ -80,7 +107,15 @@ function MainLayout({ children }) {
                         marginLeft: "10px",
                     }}
                 >
-                    <iframe src="https://ads-partners.coupang.com/widgets.html?id=832578&template=carousel&trackingCode=AF9925383&subId=&width=100&height=600&tsource=" width="100" height="600" frameBorder="0" scrolling="no" referrerPolicy="unsafe-url" browsingtopics></iframe>
+                    <iframe
+                        src="https://ads-partners.coupang.com/widgets.html?id=832578&template=carousel&trackingCode=AF9925383&subId=&width=100&height=600&tsource="
+                        width="100"
+                        height="600"
+                        frameBorder="0"
+                        scrolling="no"
+                        referrerPolicy="unsafe-url"
+                        browsingtopics
+                    ></iframe>
                 </Box>
             </Box>
         </Box>
