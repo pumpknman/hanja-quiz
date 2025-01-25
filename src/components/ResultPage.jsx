@@ -95,7 +95,7 @@ function ResultPage() {
                     <Confetti
                         width={window.innerWidth}
                         height={window.innerHeight}
-                        numberOfPieces={200}
+                        numberOfPieces={600}
                         recycle={false}
                     />
                 )}
