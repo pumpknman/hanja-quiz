@@ -16,8 +16,8 @@ function MainLayout({ children }) {
                 bottom: 0,
                 background: "linear-gradient(#fff, #f1f2f3)",
                 display: "flex",
-                flexDirection: "column", // 위아래 배치를 위해 column 추가
-                justifyContent: "space-between", // 콘텐츠와 하단 광고 간 간격 유지
+                flexDirection: "column", // 위아래 배치
+                justifyContent: "space-between",
                 alignItems: "center",
                 padding: { xs: 1, md: 0 },
                 boxSizing: "border-box",
@@ -33,7 +33,9 @@ function MainLayout({ children }) {
                     alignItems: "center",
                     width: "100%",
                     maxWidth: "1200px",
-                    flex: 1, // 콘텐츠 영역이 가능한 공간을 차지하도록 설정
+                    flex: 1, // 메인 콘텐츠가 가능한 공간을 차지
+                    overflow: "hidden",
+                    paddingBottom: { xs: "60px", md: 0 }, // 모바일에서 하단 광고 높이만큼 여백 추가
                 }}
             >
                 {/* 왼쪽 광고 영역 */}
@@ -62,13 +64,11 @@ function MainLayout({ children }) {
                 <Box
                     sx={{
                         width: { xs: "95%", md: 815 },
-                        height: { xs: "calc(100vh - 20px - 60px)", md: 815 }, // 하단 광고 높이만큼 차감
+                        height: { xs: "calc(100vh - 20px - 60px)", md: 815 }, // 하단 광고 높이(60px) 차감
                         maxWidth: 815,
                         maxHeight: 815,
                         backgroundColor: "#f8f8f8",
-                        borderRadius: { xs: "15px", md: "15px" },
-                        // border: "1px solid #fceeec",
-                        //boxShadow: "0px 4px 10px rgba(0, 0, 0, 0.2)",
+                        borderRadius: "15px",
                         display: "flex",
                         flexDirection: "column",
                         justifyContent: "center",
@@ -77,7 +77,7 @@ function MainLayout({ children }) {
                         position: "relative",
                     }}
                 >
-                    {/* ResultPage의 경우 별도 레이아웃 적용 */}
+                    {/* ResultPage 레이아웃 적용 */}
                     {isResultPage ? (
                         <Box
                             sx={{
@@ -118,19 +118,20 @@ function MainLayout({ children }) {
                 </Box>
             </Box>
 
-            {/* 하단 고정 광고 영역 (모바일에서만 표시) */}
+            {/* 하단 고정 광고 영역 */}
             <Box
                 sx={{
                     width: "100%",
                     height: "60px",
-                    display: { xs: "flex", md: "none" }, // 모바일에서만 표시
+                    display: { xs: "flex", md: "none" }, // 모바일 전용
                     justifyContent: "center",
                     alignItems: "center",
                     backgroundColor: "#f8f8f8",
-                    borderTop: "0px solid #2C2F34",
-                    position: "fixed", // 고정된 위치
+                    borderTop: "1px solid #e0e0e0",
+                    position: "fixed", // 화면 하단 고정
                     bottom: 0,
                     left: 0,
+                    zIndex: 10, // 다른 콘텐츠와 겹치지 않도록 우선순위 부여
                 }}
             >
                 <iframe

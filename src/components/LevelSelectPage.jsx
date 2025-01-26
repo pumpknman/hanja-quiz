@@ -43,7 +43,8 @@ function LevelSelectPage() {
         >
             {/* 제목 */}
             <Typography
-                variant="h3"
+                variant="h4"
+                fontWeight={800}
                 color="#33333e"
                 mb={3} // 간격 증가
                 sx={{
