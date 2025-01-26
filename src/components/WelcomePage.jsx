@@ -20,8 +20,9 @@ function WelcomePage() {
         >
             {/* 제목 */}
             <Typography
-                variant="h4"
-                color="#fff"
+                variant="h3"
+                fontWeight={900}
+                color="#33333e"
                 mb={2}
                 sx={{ textAlign: 'center' }}
             >
@@ -29,7 +30,7 @@ function WelcomePage() {
             </Typography>
             <Typography
                 variant="body1"
-                color="#ccc"
+                color="#33333e"
                 mb={4}
                 sx={{ textAlign: 'center' }}
             >
@@ -43,14 +44,14 @@ function WelcomePage() {
                 sx={{
                     px: 4,
                     py: 1.5,
-                    backgroundColor: '#1673ff',
-                    '&:hover': { backgroundColor: '#125bcc' },
+                    backgroundColor: '#33333e',
+                    '&:hover': { backgroundColor: '#33333e' },
                     fontSize: '1.2rem',
                 }}
             >
                 시작하기
             </Button>
-        </Box>
+        </Box >
     );
 }
 

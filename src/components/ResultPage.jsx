@@ -54,7 +54,7 @@ function ResultPage() {
                 left: 0,
                 right: 0,
                 bottom: 0,
-                background: "linear-gradient(#0F1214, #0C1A27)",
+                background: "linear-gradient(#f8f8f8, #f8f8f8)",
                 display: "flex",
                 justifyContent: "center",
                 alignItems: "center",
@@ -68,7 +68,7 @@ function ResultPage() {
                     height: { xs: "100%", md: 815 },
                     maxWidth: 815,
                     maxHeight: 815,
-                    backgroundColor: "#0F1214",
+                    // backgroundColor: "#0F1214",
                     // borderRadius: { xs: "15px", md: "15px" },
                     //border: "1px solid #1B1F24",
                     //boxShadow: "0px 4px 10px rgba(0, 0, 0, 0.5)",
@@ -80,14 +80,14 @@ function ResultPage() {
                     overflowY: "auto",
                     padding: 4,
                     '&::-webkit-scrollbar': {
-                        width: '10px',
+                        width: '5px',
                     },
                     '&::-webkit-scrollbar-thumb': {
-                        backgroundColor: '#444',
+                        backgroundColor: '#a09ead',
                         borderRadius: '5px',
                     },
                     '&::-webkit-scrollbar-track': {
-                        backgroundColor: '#1B1F24',
+                        backgroundColor: '#fff',
                     },
                 }}
             >
@@ -100,15 +100,15 @@ function ResultPage() {
                     />
                 )}
 
-                <Typography variant="h4" mb={2} color="#fff" textAlign="center" sx={{ fontWeight: 900 }}>
+                <Typography variant="h4" mb={2} color="#33333e" textAlign="center" sx={{ fontWeight: 900 }}>
                     총 {totalQuestions}문제 중<br /> {correctAnswers}문제 정답!
                 </Typography>
-                <Typography variant="h6" mb={4} color="#fff" textAlign="center">
+                <Typography variant="h6" mb={4} color="#33333e" textAlign="center">
                     ✅정답률: {correctPercentage}% | {formatLevelLabel(level)} | ⌛{formatTime(timeElapsed)}
                 </Typography>
 
                 <Box sx={{ width: '100%' }}>
-                    <Typography variant="h5" mb={2} color="#fff">
+                    <Typography variant="h5" mb={2} color="#33333e">
                         문제 리뷰
                     </Typography>
                     <Stack spacing={2} sx={{ width: '100%' }}>
@@ -142,8 +142,8 @@ function ResultPage() {
                         sx={{
                             px: 4,
                             py: 1,
-                            bgcolor: '#1673ff',
-                            '&:hover': { bgcolor: '#125bcc' },
+                            bgcolor: '#9565ff',
+                            '&:hover': { bgcolor: '#362767' },
                         }}
                     >
                         다시 풀기

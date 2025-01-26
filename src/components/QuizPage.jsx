@@ -166,7 +166,7 @@ function QuizPage() {
             sx={{
                 width: '100%',
                 height: '100%',
-                color: '#fff',
+                color: '#000',
                 overflow: 'hidden',
                 display: 'flex',
                 flexDirection: 'column',
@@ -181,7 +181,7 @@ function QuizPage() {
             </Typography>
 
             <Fade in={fadeInQuestion} timeout={500}>
-                <Typography variant="h1" mb={4} sx={{ color: '#fff' }}>
+                <Typography variant="h1" mb={4} sx={{ color: '#362767' }}>
                     {currentQuestion.hanja}
                 </Typography>
             </Fade>
@@ -204,7 +204,7 @@ function QuizPage() {
                                         : '#ef5350'
                                     : option === highlightedCorrect
                                         ? '#4caf50'
-                                        : '#1673ff',
+                                        : '#8d4de3',
                             '&.Mui-disabled': {
                                 backgroundColor:
                                     selectedAnswer === option
@@ -213,7 +213,7 @@ function QuizPage() {
                                             : '#ef5350'
                                         : option === highlightedCorrect
                                             ? '#4caf50'
-                                            : '#1673ff',
+                                            : '#8d4de3',
                                 color: '#fff',
                             },
                         }}

@@ -43,8 +43,8 @@ function LevelSelectPage() {
         >
             {/* 제목 */}
             <Typography
-                variant="h4"
-                color="#fff"
+                variant="h3"
+                color="#33333e"
                 mb={3} // 간격 증가
                 sx={{
                     textAlign: 'center',
@@ -60,7 +60,7 @@ function LevelSelectPage() {
                     mb: 3, // 간격 증가
                 }}
             >
-                <InputLabel id="problem-count-label" sx={{ color: '#fff' }}>
+                <InputLabel id="problem-count-label" sx={{ color: '#362767' }}>
                     문제 수
                 </InputLabel>
                 <Select
@@ -68,9 +68,9 @@ function LevelSelectPage() {
                     value={problemCount}
                     onChange={(e) => setProblemCount(e.target.value)}
                     sx={{
-                        color: '#fff',
-                        backgroundColor: '#1B1F24',
-                        borderRadius: 1,
+                        color: '#362767',
+                        backgroundColor: '#f8f8f8',
+                        borderRadius: 10,
                     }}
                 >
                     <MenuItem value={10}>10문제</MenuItem>
@@ -105,8 +105,8 @@ function LevelSelectPage() {
                                 sx={{
                                     width: { xs: '80px', sm: '100px' },
                                     height: { xs: '80px', sm: '100px' },
-                                    backgroundColor: '#1673ff',
-                                    '&:hover': { backgroundColor: '#125bcc' },
+                                    backgroundColor: '#8d4de3',
+                                    '&:hover': { backgroundColor: '#362767' },
                                     color: '#fff',
                                     fontSize: '1rem',
                                     display: 'flex',

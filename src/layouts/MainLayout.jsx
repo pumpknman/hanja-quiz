@@ -14,7 +14,7 @@ function MainLayout({ children }) {
                 left: 0,
                 right: 0,
                 bottom: 0,
-                background: "linear-gradient(#0F1214, #0C1A27)",
+                background: "linear-gradient(#fff, #f1f2f3)",
                 display: "flex",
                 flexDirection: "column", // 위아래 배치를 위해 column 추가
                 justifyContent: "space-between", // 콘텐츠와 하단 광고 간 간격 유지
@@ -65,10 +65,10 @@ function MainLayout({ children }) {
                         height: { xs: "calc(100vh - 20px - 60px)", md: 815 }, // 하단 광고 높이만큼 차감
                         maxWidth: 815,
                         maxHeight: 815,
-                        backgroundColor: "#0F1214",
+                        backgroundColor: "#f8f8f8",
                         borderRadius: { xs: "15px", md: "15px" },
-                        border: "1px solid #1B1F24",
-                        boxShadow: "0px 4px 10px rgba(0, 0, 0, 0.5)",
+                        // border: "1px solid #fceeec",
+                        //boxShadow: "0px 4px 10px rgba(0, 0, 0, 0.2)",
                         display: "flex",
                         flexDirection: "column",
                         justifyContent: "center",
@@ -126,8 +126,8 @@ function MainLayout({ children }) {
                     display: { xs: "flex", md: "none" }, // 모바일에서만 표시
                     justifyContent: "center",
                     alignItems: "center",
-                    backgroundColor: "#1B1F24",
-                    borderTop: "1px solid #2C2F34",
+                    backgroundColor: "#f8f8f8",
+                    borderTop: "0px solid #2C2F34",
                     position: "fixed", // 고정된 위치
                     bottom: 0,
                     left: 0,
