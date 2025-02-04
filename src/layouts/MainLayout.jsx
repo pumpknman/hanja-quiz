@@ -49,11 +49,15 @@ function MainLayout({ children }) {
                         marginRight: "10px",
                     }}
                 >
-<ins class="kakao_ad_area" style="display:none;"
-data-ad-unit = "DAN-45TcKPAG1vUw9vWd"
-data-ad-width = "160"
-data-ad-height = "600"></ins>
-<script type="text/javascript" src="//t1.daumcdn.net/kas/static/ba.min.js" async></script>
+                    <iframe
+                        src="https://ads-partners.coupang.com/widgets.html?id=832578&template=carousel&trackingCode=AF9925383&subId=&width=100&height=600&tsource="
+                        width="100"
+                        height="600"
+                        frameBorder="0"
+                        scrolling="no"
+                        referrerPolicy="unsafe-url"
+                        browsingtopics
+                    ></iframe>
                 </Box>
 
                 {/* 메인 콘텐츠 박스 */}
@@ -102,11 +106,15 @@ data-ad-height = "600"></ins>
                         marginLeft: "10px",
                     }}
                 >
-<ins class="kakao_ad_area" style="display:none;"
-data-ad-unit = "DAN-45TcKPAG1vUw9vWd"
-data-ad-width = "160"
-data-ad-height = "600"></ins>
-<script type="text/javascript" src="//t1.daumcdn.net/kas/static/ba.min.js" async></script>
+                    <iframe
+                        src="https://ads-partners.coupang.com/widgets.html?id=832578&template=carousel&trackingCode=AF9925383&subId=&width=100&height=600&tsource="
+                        width="100"
+                        height="600"
+                        frameBorder="0"
+                        scrolling="no"
+                        referrerPolicy="unsafe-url"
+                        browsingtopics
+                    ></iframe>
                 </Box>
             </Box>
 
@@ -126,11 +134,15 @@ data-ad-height = "600"></ins>
                     zIndex: 10, // 다른 콘텐츠와 겹치지 않도록 우선순위 부여
                 }}
             >
-<ins class="kakao_ad_area" style="display:none;"
-data-ad-unit = "DAN-LsZLmTI6Wbnm3w5R"
-data-ad-width = "320"
-data-ad-height = "50"></ins>
-<script type="text/javascript" src="//t1.daumcdn.net/kas/static/ba.min.js" async></script>
+                <iframe
+                    src="https://ads-partners.coupang.com/widgets.html?id=832578&template=carousel&trackingCode=AF9925383&subId=&width=320&height=60&tsource="
+                    width="320"
+                    height="60"
+                    frameBorder="0"
+                    scrolling="no"
+                    referrerPolicy="unsafe-url"
+                    browsingtopics
+                ></iframe>
             </Box>
         </Box>
     );
