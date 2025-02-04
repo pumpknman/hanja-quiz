@@ -49,15 +49,11 @@ function MainLayout({ children }) {
                         marginRight: "10px",
                     }}
                 >
-                    <iframe
-                        src="https://ads-partners.coupang.com/widgets.html?id=832578&template=carousel&trackingCode=AF9925383&subId=&width=100&height=600&tsource="
-                        width="100"
-                        height="600"
-                        frameBorder="0"
-                        scrolling="no"
-                        referrerPolicy="unsafe-url"
-                        browsingtopics
-                    ></iframe>
+<ins class="kakao_ad_area" style="display:none;"
+data-ad-unit = "DAN-45TcKPAG1vUw9vWd"
+data-ad-width = "160"
+data-ad-height = "600"></ins>
+<script type="text/javascript" src="//t1.daumcdn.net/kas/static/ba.min.js" async></script>
                 </Box>
 
                 {/* 메인 콘텐츠 박스 */}
@@ -106,15 +102,11 @@ function MainLayout({ children }) {
                         marginLeft: "10px",
                     }}
                 >
-                    <iframe
-                        src="https://ads-partners.coupang.com/widgets.html?id=832578&template=carousel&trackingCode=AF9925383&subId=&width=100&height=600&tsource="
-                        width="100"
-                        height="600"
-                        frameBorder="0"
-                        scrolling="no"
-                        referrerPolicy="unsafe-url"
-                        browsingtopics
-                    ></iframe>
+<ins class="kakao_ad_area" style="display:none;"
+data-ad-unit = "DAN-45TcKPAG1vUw9vWd"
+data-ad-width = "160"
+data-ad-height = "600"></ins>
+<script type="text/javascript" src="//t1.daumcdn.net/kas/static/ba.min.js" async></script>
                 </Box>
             </Box>
 
