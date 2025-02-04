@@ -134,15 +134,11 @@ function MainLayout({ children }) {
                     zIndex: 10, // 다른 콘텐츠와 겹치지 않도록 우선순위 부여
                 }}
             >
-                <iframe
-                    src="https://ads-partners.coupang.com/widgets.html?id=832578&template=carousel&trackingCode=AF9925383&subId=&width=320&height=60&tsource="
-                    width="320"
-                    height="60"
-                    frameBorder="0"
-                    scrolling="no"
-                    referrerPolicy="unsafe-url"
-                    browsingtopics
-                ></iframe>
+<ins class="kakao_ad_area" style="display:none;"
+data-ad-unit = "DAN-LsZLmTI6Wbnm3w5R"
+data-ad-width = "320"
+data-ad-height = "50"></ins>
+<script type="text/javascript" src="//t1.daumcdn.net/kas/static/ba.min.js" async></script>
             </Box>
         </Box>
     );
