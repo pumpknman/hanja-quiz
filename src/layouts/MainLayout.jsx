@@ -1,10 +1,27 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Box } from "@mui/material";
 import { useLocation } from "react-router-dom";
 
 function MainLayout({ children }) {
     const location = useLocation();
     const isResultPage = location.pathname === "/result";
+
+    useEffect(() => {
+        const script = document.createElement("script");
+        script.async = true;
+        script.type = "text/javascript";
+        script.src = "//t1.daumcdn.net/kas/static/ba.min.js";
+        script.onload = () => {
+            if (window.kakao && window.kakao.adfit) {
+                window.kakao.adfit.load();
+            }
+        };
+        document.body.appendChild(script);
+
+        return () => {
+            document.body.removeChild(script);
+        };
+    }, []);
 
     return (
         <Box
@@ -41,7 +58,7 @@ function MainLayout({ children }) {
                 {/* 왼쪽 광고 영역 */}
                 <Box
                     sx={{
-                        width: "100px",
+                        width: "160px",
                         height: "600px",
                         display: { xs: "none", md: "flex" },
                         justifyContent: "center",
@@ -98,7 +115,7 @@ function MainLayout({ children }) {
                 {/* 오른쪽 광고 영역 */}
                 <Box
                     sx={{
-                        width: "100px",
+                        width: "160px",
                         height: "600px",
                         display: { xs: "none", md: "flex" },
                         justifyContent: "center",
@@ -106,15 +123,13 @@ function MainLayout({ children }) {
                         marginLeft: "10px",
                     }}
                 >
-                    <iframe
-                        src="https://ads-partners.coupang.com/widgets.html?id=832578&template=carousel&trackingCode=AF9925383&subId=&width=100&height=600&tsource="
-                        width="100"
-                        height="600"
-                        frameBorder="0"
-                        scrolling="no"
-                        referrerPolicy="unsafe-url"
-                        browsingtopics
-                    ></iframe>
+                    <ins
+                        className="kakao_ad_area"
+                        style={{ display: "none" }}
+                        data-ad-unit="DAN-45TcKPAG1vUw9vWd"
+                        data-ad-width="160"
+                        data-ad-height="600"
+                    />
                 </Box>
             </Box>
 
@@ -123,26 +138,24 @@ function MainLayout({ children }) {
                 sx={{
                     width: "100%",
                     height: "60px",
-                    display: { xs: "flex", md: "none" }, // 모바일 전용
+                    display: { xs: "flex", md: "none" },
                     justifyContent: "center",
                     alignItems: "center",
                     backgroundColor: "#f8f8f8",
                     borderTop: "1px solid #e0e0e0",
-                    position: "fixed", // 화면 하단 고정
+                    position: "fixed",
                     bottom: 0,
                     left: 0,
-                    zIndex: 10, // 다른 콘텐츠와 겹치지 않도록 우선순위 부여
+                    zIndex: 10,
                 }}
             >
-                <iframe
-                    src="https://ads-partners.coupang.com/widgets.html?id=832578&template=carousel&trackingCode=AF9925383&subId=&width=320&height=60&tsource="
-                    width="320"
-                    height="60"
-                    frameBorder="0"
-                    scrolling="no"
-                    referrerPolicy="unsafe-url"
-                    browsingtopics
-                ></iframe>
+                <ins
+                    className="kakao_ad_area"
+                    style={{ display: "none" }}
+                    data-ad-unit="DAN-LsZLmTI6Wbnm3w5R"
+                    data-ad-width="320"
+                    data-ad-height="50"
+                />
             </Box>
         </Box>
     );

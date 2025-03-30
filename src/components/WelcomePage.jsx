@@ -51,6 +51,23 @@ function WelcomePage() {
             >
                 시작하기
             </Button>
+            <Typography
+                variant="body2"
+                color="textSecondary"
+                sx={{ mt: 10, textAlign: 'center' }}
+            >
+                버그/문의: <a
+                    href="mailto:hanjatest.me@gmail.com"
+                    style={{
+                        color: '#8d4de3',
+                        textDecoration: 'none',
+                    }}
+                    onMouseOver={e => e.currentTarget.style.color = '#362767'}
+                    onMouseOut={e => e.currentTarget.style.color = '#8d4de3'}
+                >
+                    hanjatest.me@gmail.com
+                </a>
+            </Typography>
         </Box >
     );
 }
